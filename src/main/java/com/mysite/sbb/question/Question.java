@@ -1,6 +1,7 @@
 package com.mysite.sbb.question; 
 
-import java.time.LocalDateTime; 
+import java.time.LocalDateTime;  
+
 import java.util.List;
 
 import com.mysite.sbb.answer.Answer;
@@ -12,9 +13,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType; 
 import jakarta.persistence.Id; 
 import jakarta.persistence.OneToMany; 
+import jakarta.persistence.ManyToOne;
+import com.mysite.sbb.user.SiteUser;
 
 import lombok.Getter; 
 import lombok.Setter; 
+import java.util.Set;
+import jakarta.persistence.ManyToMany;
 
 @Getter 
 @Setter 
@@ -34,4 +39,12 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) 
     private List<Answer> answerList; 
+    
+    @ManyToOne
+    private SiteUser author;
+    
+    private LocalDateTime modifyDate;
+    
+    @ManyToMany
+    Set<SiteUser> voter;
 }
